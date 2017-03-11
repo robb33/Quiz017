@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <meta charset="UTF-8">
+        <title>Title Trivia Game</title>
+
+        <!-- Added a link to Bootstrap-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+       <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+       <link href="https://fonts.googleapis.com/css?family=Prompt:400,500i,800i,900i" rel="stylesheet">
+
+        
+    </head>
+	<body>
+
+<div class="body-gradient">
+        <div class="container">
+          <div id="orangesection">
+
+		{{#if logged_in}}
+			{{#if company}}
+				<a href="/coupons">Make a Coupon</a>
+				<a href="/coupons/created">Coupons Created</a>
+			{{else}}
+				<a href="/coupons">All Coupons</a>
+				<a href="/coupons/purchased">My Purchases</a>
+			{{/if}}
+
+			<a href="/users/sign-out" id="sign-out">Sign Out ({{this.username}})</a>
+		{{else}}
+			<a href="/users/sign-in">Sign In</a>
+			<a href="/users/new">Register</a>
+		{{/if}}
+
+		
+
+		<p class="clear"><strong>logged_in:</strong> {{logged_in}} |
+		<strong>user_email:</strong> {{user_email}} |
+		<strong>user_id:</strong> {{user_id}} |
+		<strong>company:</strong> {{company}} |
+		<strong>username:</strong> {{username}}</p>
+		
+
+		{{{ body }}}
+
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+  <div >
+      <p>&copy; Copyright 2017</p>
+  </div>
+</div>
+
+
+		<script src="https://code.jquery.com/jquery-3.1.1.min.js"integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="crossorigin="anonymous"></script>
+		<script src="/assets/js/ajax.js"></script>
+	</body>
+
+</html>
