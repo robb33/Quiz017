@@ -1,3 +1,19 @@
-<div id="titletrivia">
-    <h1>Title Trivia Game</h1>
+
+<div id="sectiontitle">
+<h2>Welcome! Please Sign In</h2>
 </div>
+  
+  <form class="create-update-form" action="/users/login" method="POST">
+
+    <div id="form-group">
+        <input type="text" id="em" placeholder="Email" name="email">
+        <input type="password" id="pass" placeholder="Password" name="password">
+        <input id="submit-user" type="submit" value="Sign In">
+        <a id="add-user" href="/users/new" >Sign Up</a>
+        <br>
+        <!-- A link if user trouble login in set up add update route to reset their password-->
+        <a id="forgotpassword" href="forgotpassword.html">Forgot Password?</a>
+
+    </div>
+
+  </form>
