@@ -1,17 +1,54 @@
-$('.purchaseCoupon').on('click', function(e){
-	e.preventDefault();
+var computerChoices = ["r", "p", "s"];
 
-	var thisForm = $(this).parent();
+function computerChooses(arr){
+	var randomComputerChoiceIndex = Math.floor(Math.random() * arr.length);
 
-	var couponid = thisForm.data('couponid');
-	var quant = $(this).siblings().eq(0).val();
+	return arr[randomComputerChoiceIndex];
+}
 
-	var data = {
-		coupon_id: couponid,
-		quantity: quant
+var score = 0;
+var turns = 15;
+
+$('#score').text(score);
+$('#turns').text(turns);
+
+$('.choice').on('click', function(){
+	var randomComputerChoice = computerChooses(computerChoices);
+
+	var yourChoice = $(this).data('choice');
+
+	if (yourChoice == randomComputerChoice){
+		score = score + 10;
+		$('#status').text('you tied!');
+	}else if(yourChoice == 'r' && randomComputerChoice == 's'){
+		score = score + 30;
+		$('#status').text('you won!');
+	}else if(yourChoice == 'p' && randomComputerChoice == 'r'){
+		score = score + 30;
+		$('#status').text('you won!');
+	}else if(yourChoice == 's' && randomComputerChoice == 'p'){
+		score = score + 30;
+		$('#status').text('you won!');
+	}else{
+		score = score - 30;
+		$('#status').text("You lost! You're a loser!")
 	}
 
-	$.post("/coupons/users/create", data, function(response){
-		alert("the response from the server is: " + response + ". If 200 then that's good. If 500 then there was something wrong.");
-	});
+	turns--;
+	$('#turns').text(turns);
+	$('#score').text(score);
+
+	if (turns == 0){
+		var data = {
+			total_score: score,
+		}
+
+		$.ajax({
+			url: "/scores/create", 
+			method: "POST",
+			data: data, 
+		}).done(function(response){
+			window.location = "/scores"
+		});
+	}
 });

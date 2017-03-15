@@ -59,7 +59,7 @@
       font-style: italic;
       font-weight: bold;
     }
-    #create-update-form label {
+    .create-update-form label {
       font-family: 'Prompt', sans-serif;
       font-weight: bold;
       font-style: italic;
@@ -76,7 +76,7 @@
       border-radius: 10px;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6);
     }
-    #create-update-form {
+    .create-update-form {
     /*  text-align: center;
       margin: 0 auto;*/
       margin-top:0;
@@ -90,7 +90,7 @@
         margin-left: 0;
         margin: 0 auto;
     }
-    input#add-newuser, a#backtomain  {
+    button#add-newuser, a#backtomain  {
       font-weight: bold;
       display: inline-block;
       font-size: 16px;
@@ -106,13 +106,13 @@
       text-decoration: none;
       box-shadow: 4px 5px #999;
     }
-    input#add-newuser:hover, a#backtomain:hover  {
+    button#add-newuser:hover, a#backtomain:hover  {
       color: #25769d;
       background-color: #ffffff;
       border: 2px solid #ffffff;
     /*  text-shadow: 2px 2px 2px grey;*/
     }
-    input#add-newuser:active, a#backtomain:active {
+    button#add-newuser:active, a#backtomain:active {
       background-color: #ffffff;
       box-shadow: 3px 3px #666;
       transform: translateY(4px);
@@ -159,7 +159,7 @@
                 <h3>Register Here</h3>
               </div>
 
-                    <form id="create-update-form" action="/users/create" method="POST">
+                    <form class="create-update-form" action="/users/create" method="POST">
                       <div class="form-group">
                         <label for="username">Username</label><br>
                         <input type="text" id="username" name="username" placeholder="testman">
@@ -178,8 +178,9 @@
                       </div>
 
                       <!-- to test if new password match to retype password before added to database -->
-                        <input id="add-newuser" type="submit" value="Sign Up">
+                        <button id="add-newuser" type="submit">Sign Up</button>
                         <a id="backtomain" href="login.html" >Login</a>
+                       <!--  href="/users/sign-in" -->
                         <br>
 
                     </form>

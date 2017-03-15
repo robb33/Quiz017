@@ -101,7 +101,7 @@
         margin: 0 auto;
     }
 
-    input#submit-user, a#add-user  {
+    button#submit-user, a#add-user  {
       font-weight: bold;
       display: inline-block;
       font-size: 16px;
@@ -118,14 +118,14 @@
       box-shadow: 4px 5px #999;
     }
 
-    input#submit-user:hover, a#add-user:hover  {
+    button#submit-user:hover, a#add-user:hover  {
       color: #25769d;
       background-color: #ffffff;
       border: 2px solid #ffffff;
     /*  text-shadow: 2px 2px 2px grey;*/
     }
 
-    input#submit-user:active, a#add-user:active {
+    button#submit-user:active, a#add-user:active {
       background-color: #ffffff;
       box-shadow: 3px 3px #666;
       transform: translateY(4px);
@@ -178,8 +178,9 @@
                     <div id="form-group">
                         <input type="text" id="em" placeholder="Email" name="email">
                         <input type="password" id="pass" placeholder="Password" name="password">
-                        <input id="submit-user" type="submit" value="Sign In">
+                        <button id="submit-user" type="submit">Sign In</button>
                         <a id="add-user" href="register.html" >Sign Up</a>
+                      <!--   href="/users/new" -->
                         <br>
                         <!-- A link if user trouble login in set up add update route to reset their password-->
                         <a id="forgotpassword" href="forgotpassword.html">Forgot Password?</a>

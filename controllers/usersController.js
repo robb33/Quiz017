@@ -2,18 +2,7 @@ var bcrypt = require('bcryptjs');
 var express = require('express');
 var router  = express.Router();
 var mysql = require('mysql')
-
-var connection = mysql.createConnection({
-  host: "localhost",
-  port: 3000,
-
-  // Your username
-  user: "root",
-
-  // Your password
-  password: "",
-  database: "trivias_db"
-});
+var connection = require('../config/connection.js')
 
 //this is the users_controller.js file
 router.get('/new', function(req,res) {
@@ -26,7 +15,7 @@ router.get('/sign-in', function(req,res) {
 
 router.get('/sign-out', function(req,res) {
   req.session.destroy(function(err) {
-     res.redirect('/trivias')
+     res.redirect('/scores')
   })
 });
 
@@ -46,9 +35,10 @@ router.post('/login', function(req, res) {
               req.session.logged_in = true;
               req.session.user_id = response[0].id;
               req.session.user_email = response[0].email;
+              req.session.company = response[0].company;
               req.session.username = response[0].username;
 
-              res.redirect('/coupons');
+              res.redirect('/scores');
             }else{
               res.redirect('/users/sign-in')
             }
@@ -60,6 +50,7 @@ router.post('/create', function(req,res) {
   var query = "SELECT * FROM users WHERE email = ?"
 
   connection.query(query, [ req.body.email ], function(err, response) {
+    console.log(response)
     if (response.length > 0) {
       res.send('we already have an email or username for this account')
     }else{
@@ -69,7 +60,7 @@ router.post('/create', function(req,res) {
           bcrypt.hash(req.body.password, salt, function(err, hash) {            
             var query = "INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)"
 
-            connection.query(query, [ req.body.username, req.body.email, hash], function(err, response) {
+            connection.query(query, [ req.body.username, req.body.email, hash ], function(err, response) {
 
               req.session.logged_in = true;
 
@@ -79,8 +70,9 @@ router.post('/create', function(req,res) {
               connection.query(query, [ req.session.user_id ], function(err, response) {
                 req.session.username = response[0].username;
                 req.session.user_email = response[0].email;
+                req.session.company = response[0].company;
 
-                res.redirect('/coupons')
+                res.redirect('/scores')
               });
             });
           });

@@ -29,11 +29,11 @@ app.set("view engine", "handlebars");
 // Import routes and give the server access to them.
 var applicationController = require("./controllers/applicationController.js");
 var usersController = require("./controllers/usersController.js");
-var triviasController = require("./controllers/triviasController.js");
+var scoresController = require("./controllers/scoresController.js");
 
 app.use("/", applicationController);
 app.use("/users", usersController);
-app.use("/trivias", triviasController);
+app.use("/scores", scoresController);
 
 
 app.listen(port);

@@ -85,7 +85,7 @@
         margin: 0 auto;
     }
 
-    input#submit-user, a#add-user  {
+    button#submit-user, a#add-user  {
       font-weight: bold;
       display: inline-block;
       font-size: 16px;
@@ -102,14 +102,14 @@
       box-shadow: 4px 5px #999;
     }
 
-    input#submit-user:hover, a#add-user:hover  {
+    button#submit-user:hover, a#add-user:hover  {
       color: #25769d;
       background-color: #ffffff;
       border: 2px solid #ffffff;
     /*  text-shadow: 2px 2px 2px grey;*/
     }
 
-    input#submit-user:active, a#add-user:active {
+    button#submit-user:active, a#add-user:active {
       background-color: #ffffff;
       box-shadow: 3px 3px #666;
       transform: translateY(4px);
@@ -144,7 +144,7 @@
     }
 
 /*____Register Form Style____________________________*/
-    #create-update-form label {
+    .create-update-form label {
       font-family: 'Prompt', sans-serif;
       font-weight: bold;
       font-style: italic;
@@ -163,7 +163,7 @@
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6);
     }
 
-    #create-update-form {
+    .create-update-form {
     /*  text-align: center;
       margin: 0 auto;*/
       margin-top:0;
@@ -171,7 +171,7 @@
       margin-right: 20px;
     }
 
-input#add-newuser, a#backtomain  {
+button#add-newuser, a#backtomain  {
       font-weight: bold;
       display: inline-block;
       font-size: 16px;
@@ -188,14 +188,14 @@ input#add-newuser, a#backtomain  {
       box-shadow: 4px 5px #999;
     }
 
-    input#add-newuser:hover, a#backtomain:hover  {
+    button#add-newuser:hover, a#backtomain:hover  {
       color: #25769d;
       background-color: #ffffff;
       border: 2px solid #ffffff;
     /*  text-shadow: 2px 2px 2px grey;*/
     }
 
-    input#add-newuser:active, a#backtomain:active {
+    button#add-newuser:active, a#backtomain:active {
       background-color: #ffffff;
       box-shadow: 3px 3px #666;
       transform: translateY(4px);

@@ -2,7 +2,7 @@
     <h3>Register Here</h3>
  </div>
 
-<form id="create-update-form" action="/users/create" method="POST">
+<form class="create-update-form" action="/users/create" method="POST">
 <div class="form-group">
 <label for="username">Username</label><br>
 <input type="text" id="username" name="username" placeholder="testman">
@@ -15,12 +15,8 @@
 <label for="pass">Password</label><br>
 <input type="password" id="pass" name="password" placeholder="*********">
 </div>
-<div class="form-group">
-<label for="retypepass">Re-Type Password</label><br>
-<input type="password" id="retypepass" placeholder="*********">
-</div>
 
-<input id="add-newuser" type="submit" value="Sign Up">
+<button id="add-newuser" type="submit">Sign Up</button>
 <a id="backtomain" href="/users/sign-in" >Login</a>
 <br>
 
