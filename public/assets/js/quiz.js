@@ -20,6 +20,7 @@ var currentQuestionIndex = 0;
 var currentQuestion;
 var time = 7*1000;
 var timer;
+var score = 0;
 $('#time').text(time/1000);
 
 function countDown(){
@@ -36,6 +37,19 @@ function countDown(){
 			if (currentQuestionIndex <= questions.length - 1){
 				loadQuestion();
 			}else{
+
+				var data = {
+					total_score: score,
+				}
+
+				$.ajax({
+					url: "/scores/create", 
+					method: "POST",
+					data: data, 
+				}).done(function(response){
+					window.location = "/scores"
+				});
+
 				clearInterval(timer);
 				alert('put a fork in it');
 				$("#container").empty();
@@ -75,18 +89,34 @@ loadQuestion();
 $(document).on('click', '.answer', function(){
 	if ($(this).data('key') == currentQuestion.correctAnswer){
 		alert('winner winner winner!!');
+		score = score + 10;
 	}else{
 		alert('you are a weiner weiner weiner');
+		score = score - 5;
 	}
 
 	currentQuestionIndex++;
+
+	$('#score').text(score);
 
 	if (currentQuestionIndex <= questions.length - 1){
 		loadQuestion();
 		time = 1000 * 7;
 		$('#time').text(time/1000);
 	}else{
-		alert('put a fork in it');
+
+		var data = {
+			total_score: score,
+		}
+
+		$.ajax({
+			url: "/scores/create", 
+			method: "POST",
+			data: data, 
+		}).done(function(response){
+			window.location = "/scores"
+		});
+
 		clearInterval(timer);
 		$("#container").empty();
 		$("#container").html("<p>Finito!</p>");
