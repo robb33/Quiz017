@@ -82,6 +82,7 @@ var game = {
 		game.unanswered++;
 		$('#subwrapper').html('<h2>OUT OF TIME!</h2>');
 		$('#subwrapper').append('<h3>The Correct Answer Was: '+questions[game.currentQuestion].correctAnswer+ '</h3>');
+		$('#subwrapper').append('<img src='+questions[game.currentQuestion].image+ '>');
 			if(game.currentQuestion==questions.length-1){
 					setTimeout(game.results,3*1000);
 				} else {
