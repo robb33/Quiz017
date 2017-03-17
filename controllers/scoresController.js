@@ -28,8 +28,9 @@ router.get('/', function(req,res) {
 		res.redirect('/users/sign-in');
 	}
 
-	
 });
+
+
 
 router.post('/create', function(req,res) {
 	var query = "INSERT INTO scores (total_score, user_id) VALUES (?, ?)";

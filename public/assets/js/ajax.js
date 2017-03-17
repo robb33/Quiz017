@@ -21,6 +21,7 @@ var currentQuestion;
 var time = 7*1000;
 var timer;
 var score = 0;
+var data = 0;
 $('#time').text(time/1000);
 
 function countDown(){
@@ -38,7 +39,7 @@ function countDown(){
 				loadQuestion();
 			}else{
 
-				var data = {
+				data = {
 					total_score: score,
 				}
 
@@ -105,7 +106,7 @@ $(document).on('click', '.answer', function(){
 		$('#time').text(time/1000);
 	}else{
 
-		var data = {
+		data = {
 			total_score: score,
 		}
 
