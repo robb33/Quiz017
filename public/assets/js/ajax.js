@@ -1,44 +1,110 @@
-var computerChoices = ["r", "p", "s"];
+var questions = [
+	{
+		question: "What's Robbie Chance's favorite vacation spot?",
+		answers: ["Gettysburg", "Pittsburgh", "Rothensburgh", "his couch"],
+		correctAnswer: 3
+	},
+	{
+		question: "What sport did Richie Rich play when he grew up?",
+		answers: ["football", "fencing", "ballet", "basketball"],
+		correctAnswer: 3
+	},
+	{
+		question: "What did Sheri Pie do before the bootcamp?",
+		answers: ["teacher", "hunter", "gatherer", "graphic designer"],
+		correctAnswer: 3
+	}
+]
 
-function computerChooses(arr){
-	var randomComputerChoiceIndex = Math.floor(Math.random() * arr.length);
+var currentQuestionIndex = 0;
+var currentQuestion;
+var time = 7*1000;
+var timer;
+var score = 0;
+$('#time').text(time/1000);
 
-	return arr[randomComputerChoiceIndex];
+function countDown(){
+	timer = setInterval(function(){
+		time -= 1000;
+		$('#time').text(time/1000);
+
+		if (time == 0){
+			time = 7 * 1000;
+			$('#time').text(time/1000);
+
+			currentQuestionIndex++;
+
+			if (currentQuestionIndex <= questions.length - 1){
+				loadQuestion();
+			}else{
+
+				var data = {
+					total_score: score,
+				}
+
+				$.ajax({
+					url: "/scores/create", 
+					method: "POST",
+					data: data, 
+				}).done(function(response){
+					window.location = "/scores"
+				});
+
+				clearInterval(timer);
+				alert('put a fork in it');
+				$("#container").empty();
+				$("#container").html("<p>Finito!</p>");
+			}
+		}
+	}, 1 * 1000);
 }
 
-var score = 0;
-var turns = 15;
+$('#container').hide();
 
-$('#score').text(score);
-$('#turns').text(turns);
+$('#startGame').on('click', function(){
+	countDown();
+	$('#container').show();
+})
 
-$('.choice').on('click', function(){
-	var randomComputerChoice = computerChooses(computerChoices);
 
-	var yourChoice = $(this).data('choice');
 
-	if (yourChoice == randomComputerChoice){
+
+function loadQuestion(){
+
+	currentQuestion = questions[currentQuestionIndex];
+
+	$('#displayQuestion').html("");
+
+	var question = $('<div>').text(currentQuestion.question);
+	$('#displayQuestion').append(question);
+
+	for (var i=0; i<currentQuestion.answers.length; i++){
+		var answerButton = $("<button>").attr('class', 'answer').attr('data-key', i).text(currentQuestion.answers[i]);
+		$('#displayQuestion').append(answerButton);
+	}
+}
+
+loadQuestion();
+
+$(document).on('click', '.answer', function(){
+	if ($(this).data('key') == currentQuestion.correctAnswer){
+		alert('winner winner winner!!');
 		score = score + 10;
-		$('#status').text('you tied!');
-	}else if(yourChoice == 'r' && randomComputerChoice == 's'){
-		score = score + 30;
-		$('#status').text('you won!');
-	}else if(yourChoice == 'p' && randomComputerChoice == 'r'){
-		score = score + 30;
-		$('#status').text('you won!');
-	}else if(yourChoice == 's' && randomComputerChoice == 'p'){
-		score = score + 30;
-		$('#status').text('you won!');
 	}else{
-		score = score - 30;
-		$('#status').text("You lost! You're a loser!")
+		alert('you are a weiner weiner weiner');
+		score = score - 5;
 	}
 
-	turns--;
-	$('#turns').text(turns);
+	currentQuestionIndex++;
+
 	$('#score').text(score);
 
-	if (turns == 0){
+	if (currentQuestionIndex <= questions.length - 1){
+		loadQuestion();
+		time = 1000 * 7;
+		$('#time').text(time/1000);
+	}else{
+
 		var data = {
 			total_score: score,
 		}
@@ -50,5 +116,10 @@ $('.choice').on('click', function(){
 		}).done(function(response){
 			window.location = "/scores"
 		});
+
+		clearInterval(timer);
+		$("#container").empty();
+		$("#container").html("<p>Finito!</p>");
 	}
-});
+})
+
