@@ -13,11 +13,19 @@ router.get('/sign-in', function(req,res) {
   res.render('users/sign_in');
 });
 
+// router.get('/recover', function(req,res) {
+//   res.render('users/recover');
+// });
+
+
+
 router.get('/sign-out', function(req,res) {
   req.session.destroy(function(err) {
      res.redirect('/scores')
   })
 });
+
+
 
 //if user trys to sign in with the wrong password or email tell them that on the page
 router.post('/login', function(req, res) {
@@ -77,11 +85,12 @@ router.post('/create', function(req,res) {
             });
           });
       });
-
     }
   });
-
-
 });
+
+// router.post('/recover', function(req,res){
+//   console.log("hello world");
+// });
 
 module.exports = router;
